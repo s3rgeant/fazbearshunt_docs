@@ -12,7 +12,7 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 		["IgnitedFreddy"] = {name = "ifreddy", fullname = "Ignited Freddy", color = Color(200,200,200)},
 		["IgnitedBonnie"] = {name = "igbonnie", fullname = "Ignited Bonnie", color = Color(200,200,200)},
 		["IgnitedChica"] = {name = "igchica", fullname = "Ignited Chica", color = Color(200,200,200)},
-		["IgnitedFoxy"] = {name = "igfoxy", fullname = "Ignited Foxy", color = Color(200,200,200)}
+		["IgnitedFoxy"] = {name = "igfoxy", fullname = "Ignited Foxy", color = Color(200,200,200)},
 		["IgnitedSpringtrap"] = {name = "igspringtrap", fullname = "Ignited Springtrap", color = Color(200,200,200)}
 	}
 	--[[
