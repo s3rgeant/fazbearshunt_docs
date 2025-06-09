@@ -86,16 +86,3 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 	end
 	
 end)
-
-hook.Add("fh_prestartgame", "my_custom_round", function(roundType)
-	if math.random(1,2) == 1 then
-		--[[ 
-			Если рандомное число от 1 до 2 равно 1 (50% шанс), то при начале игры таймер не начинается,
-			а убийцы не назначаются игрокам. Можно также воспользоваться переменной roundType, и сделать проверку,
-			например, на раунд со спрингтрапом 
-
-			Сюда можно внедрить свой код для таймера, и выдачи аниматроника(-ов)
-		]]--
-		return false
-	end
-end)
