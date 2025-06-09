@@ -6,7 +6,7 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 		поэтому мы чиним этот пилл пак после того как режим полностью загрузится.
 	]]--
 
-	include("include/pill_reignited_m.lua") -- Файл, в котором лежат данные о аниматрониках.
+	include("autorun/include/pill_reignited_m.lua") -- Файл, в котором лежат данные о аниматрониках.
 	
 	local animatronics = { 
 		["IgnitedFreddy"] = {name = "ifreddy", fullname = "Ignited Freddy", color = Color(200,200,200)},
