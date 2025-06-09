@@ -6,7 +6,7 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 		поэтому мы чиним этот пилл пак после того как режим полностью загрузится.
 	]]--
 
-	include("include/pill_tjoc.lua") -- Файл, в котором лежат данные о аниматрониках.
+	include("include/pill_base_reignited_m.lua") -- Файл, в котором лежат данные о аниматрониках.
 	
 	local animatronics = { 
 		["IgnitedFreddy"] = {name = "ifreddy", fullname = "Ignited Freddy", color = Color(200,200,200)},
@@ -21,14 +21,13 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 		
 		Обязательными данными аниматроников для режима являются:
 		
-		name	 	отвечает за нахождение иконки аниматроника для интерфейса по пути "vgui/name_header.png"
-		fullname 	отвечает за имя аниматроника отображаемое в Админ Панели, и имя выводимое в чат при выдаче
-		color 		отвечает за цвет текста, уведомляющего выдачу аниматроника в чате
+		name	 	отвечает за нахождение иконки аниматроника для интерфейса по пути "vgui/animatronics_hud/heads/name.png" и "vgui/bars/name.png"
+		fullname 	отвечает за имя аниматроника отображаемое в Админ Панели, и имя выводимое в чат при выдаче игроку
+		color 		отвечает за цвет интерфейса аниматроника
 	]]--
 	
-	for anim,tablo in pairs( animatronics ) do
+	for anim,tablo in pairs( animatronics ) do -- Для всех аниматроников заменяем их способности, на способности встроенных в режим аниматроников
 		pk_pills.editPillTable(anim, "attack",
-		
 			{
 			mode="trigger",
 			func=function(ply,ent)
@@ -39,7 +38,7 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 				local target = FindNearestPlayer(ent:GetPos(), 130, ply, 90)
 				if !IsValid(target) then return end
 				
-				ent:PillSound("melee",false)
+				ent:PillSound("melee",false) -- Звук скримера (Встроенный в Пилл)
 				if target:IsNPC() then
 					target:TakeDamage(target:Health(), ply)
 					return 
