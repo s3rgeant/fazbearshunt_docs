@@ -8,7 +8,7 @@ hook.Add("fh_prestartgame", "golden_freddy_round", function(sprRound)
 		
 		players = fh.GetEarnedKiller(players) -- Убираем из списка игроков, которые в один из прошлых прошлых раундов побывали на роли убийцы.
 		
-		local chosenPlayer = randomChoice(players) -- Выбираем случайного игрока из получившегося списка.
+		local chosenPlayer = fh.randomChoice(players) -- Выбираем случайного игрока из получившегося списка.
 		
 		giveKiller(chosenPlayer, 'pill_wgfreddy2', true) -- Выдаём случайному игроку Золотого Фредди
 		
