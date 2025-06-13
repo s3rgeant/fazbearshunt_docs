@@ -6,7 +6,7 @@ hook.Add("fh_prestartgame", "golden_freddy_round", function(sprRound)
 			table.RemoveByValue(players, k)
 		end
 		
-		players = fh.GetEarnedKiller(players) -- Убираем из списка игроков, которые в один из прошлых прошлых раундов побывали на роли убийцы.
+		players = fh.GetEarnedKillers(players) -- Убираем из списка игроков, которые в один из прошлых прошлых раундов побывали на роли убийцы.
 		
 		local chosenPlayer = fh.randomChoice(players) -- Выбираем случайного игрока из получившегося списка.
 		
