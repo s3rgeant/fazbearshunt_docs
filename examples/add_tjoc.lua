@@ -31,27 +31,16 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 			{
 			mode="trigger",
 			func=function(ply,ent)
-				if ply.lobbyFreeze != nil and ply.lobbyFreeze then return end -- Чтобы нельзя было атаковать в первую минуту игры
-				
-				if IsValid(ply:GetEntityInUse()) then return end -- Чтобы нельзя было атаковать с пропом в руках
+				if IsValid(ply:GetEntityInUse()) then return end
 				
 				local target = FindNearestPlayer(ent:GetPos(), 130, ply, 90)
-				if !IsValid(target) then return end
 				
-				ent:PillSound("melee",false) -- Звук скримера (Встроенный в Пилл)
-				if target:IsNPC() then
-					target:TakeDamage(target:Health(), ply)
+				if !IsValid(target) then 
+					AnimatronicBreakProp(ply, ent)
 					return 
 				end
-				jumpscareEvent(ply, ent, target, 50)
-				ent:PillAnim("scare",true) -- ЕСЛИ У АНИМАТРОНИКА ЕСТЬ ПОДХОДЯЩАЯ АНИМАЦИЯ СКРИМЕРА, ТО ТУТ НАДО ЗАМЕНИТЬ "scare" НА НАЗВАНИЕ АНИМАЦИИ!
-			
-				timer.Simple( 1.6, function()
-					if !IsValid(target) then return end
-					target:UnLock()
-					ply:UnLock()
-					target:TakeDamage(target:Health(), ply)
-				end)
+				
+				performJumpscare(ply, ent, target, 1.6, "", 50, "")
 			end
 			}) -- Заменяем атаку аниматроника, на дефолтную атаку аниматроников из FH
 			
@@ -65,14 +54,13 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 				run=520,
 				ducked=pk_pills.getPillTable(anim)["moveSpeed"].ducked,
 			}
-		) -- Меняем скорость бега, так как она слишком высокая; 
+		) -- Меняем скорость бега, так как она слишком высокая, скорость ходьбы и ползанья не трогаем; 
 		
 		pk_pills.editPillTable(anim, "reload", -- Даём возможность использовать просвет
-		
 			function(ply,ent)
 				if ply.lobbyFreeze != nil and ply.lobbyFreeze then return end
 				
-				HighlightPlayers(ply, ent)
+				highlight.ByDistance(ply, ent)
 			end
 		)
 		
@@ -85,3 +73,4 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 	end
 	
 end)
+
