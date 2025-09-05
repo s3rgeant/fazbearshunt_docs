@@ -27,7 +27,7 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 	]]--
 	
 	for anim,tablo in pairs( animatronics ) do -- Для всех аниматроников заменяем их способности, на способности встроенных в режим аниматроников
-		pk_pills.editPillTable(anim, "attack",
+		pills.editPillTable(anim, "attack",
 			{
 			mode="trigger",
 			func=function(ply,ent)
@@ -44,11 +44,11 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 			end
 			}) -- Заменяем атаку аниматроника, на дефолтную атаку аниматроников из FH
 			
-		pk_pills.editPillTable(anim, "hideHud", true) -- Выключаем дефолтный интерфейс
-		pk_pills.editPillTable(anim, "noFallDamage", true) -- Выключаем урон от падения
-		pk_pills.editPillTable(anim, "muteSteps", true) -- Глушим звуки шагов (Игрока, не аниматроника)
+		pills.editPillTable(anim, "hideHud", true) -- Выключаем дефолтный интерфейс
+		pills.editPillTable(anim, "noFallDamage", true) -- Выключаем урон от падения
+		pills.editPillTable(anim, "muteSteps", true) -- Глушим звуки шагов (Игрока, не аниматроника)
 		
-		pk_pills.editPillTable(anim, "moveSpeed", 
+		pills.editPillTable(anim, "moveSpeed", 
 			{
 				walk=pk_pills.getPillTable(anim)["moveSpeed"].walk,
 				run=520,
@@ -56,10 +56,8 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 			}
 		) -- Меняем скорость бега, так как она слишком высокая, скорость ходьбы и ползанья не трогаем; 
 		
-		pk_pills.editPillTable(anim, "reload", -- Даём возможность использовать просвет
+		pills.editPillTable(anim, "reload", -- Даём возможность использовать просвет
 			function(ply,ent)
-				if ply.lobbyFreeze != nil and ply.lobbyFreeze then return end
-				
 				highlight.ByDistance(ply, ent)
 			end
 		)
@@ -73,4 +71,5 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 	end
 	
 end)
+
 
