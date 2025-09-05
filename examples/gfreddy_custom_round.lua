@@ -1,3 +1,6 @@
+--[[
+	ВЫ НЕ ДОЛЖНЫ ИСПОЛЬЗОВАТЬ ТАКОЙ МЕТОД ЗАМЕНЫ РАУНДА, ЗАЙДИТЕ НА ВИКИПЕДИЮ И ПРОЧТИТЕ СТРАНИЦУ "РАУНДЫ".
+]]--
 hook.Add("fh_prestartgame", "golden_freddy_round", function(sprRound)
 	if math.random(1,10) == 1 then -- С шансом 10%, наш код ниже сработает
 		local players = player.GetAll() -- Получаем список игроков
