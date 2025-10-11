@@ -50,9 +50,9 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 		
 		pills.editPillTable(anim, "moveSpeed", 
 			{
-				walk=pk_pills.getPillTable(anim)["moveSpeed"].walk,
+				walk=pills.getPillTable(anim)["moveSpeed"].walk,
 				run=520,
-				ducked=pk_pills.getPillTable(anim)["moveSpeed"].ducked,
+				ducked=pills.getPillTable(anim)["moveSpeed"].ducked,
 			}
 		) -- Меняем скорость бега, так как она слишком высокая, скорость ходьбы и ползанья не трогаем; 
 		
@@ -71,5 +71,6 @@ hook.Add("PostGamemodeLoaded", "fh_test_tjoc", function()
 	end
 	
 end)
+
 
 
