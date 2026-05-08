@@ -1,0 +1,75 @@
+
+@include "base.fgd"
+
+// ANIMATRONIC SPAWN POINT
+@PointClass base(PlayerClass, Angles) studio("models/editor/playerstart.mdl") = info_player_killer :
+	"This entity indicates the position and facing direction at which the player will spawn. Any number of "+
+	"info_player_start entities may be placed in a map for when working in cordoned-off portions of the map. "+
+	"When multiple info_player_start entities are present in a map, set the 'Master' spawnflag on one of them "+
+	"to indicate which one should be used when running the entire map."
+[
+	spawnflags(flags) =
+	[
+		1: "Master (Has priority if multiple info_player_killer exist)" : 0
+	]
+	
+	animatronic_name(string) : "Animatronic Name" : "" : "If set, only this animatronic type can spawn there. By example: pill_wbonnie2"
+]
+
+// KILLER VICTORY DANCE POS
+@PointClass base(PlayerClass, Angles) studio("models/editor/playerstart.mdl") = info_killer_win :
+	"This entity indicates the position and facing direction at which the player will spawn. Any number of "+
+	"info_player_start entities may be placed in a map for when working in cordoned-off portions of the map. "+
+	"When multiple info_player_start entities are present in a map, set the 'Master' spawnflag on one of them "+
+	"to indicate which one should be used when running the entire map."
+[
+	spawnflags(flags) =
+	[
+		1: "Master (Has priority if multiple info_player_killer exist)" : 0
+	]
+	
+	targetcamera(target_destination) : "Target Camera" : "" : "Name of the camera entity that will be view entity for all players at the end of the round, won by animatronics."
+]
+
+// KILLER VICTORY CAMERA
+@PointClass base(Targetname, Angles) studio("models/editor/spot.mdl")  = fh_win_camera : "Animated win camera. To be used with info_killer_win"
+[
+]
+
+@FilterClass base(BaseFilter) iconsprite("editor/filter_team.vmt") = filter_activator_team :
+	"A filter that filters by the team of the activator."
+[
+	filterteam(choices) : "Filter Team Number" : 2 : "The team number to filter by.  If the filter mode is Allow, only entities whose "+
+		"team number matches the given team will pass the filter. If the filter mode is Disallow, "+
+		"all entities EXCEPT those whose team number matches the given team will pass the filter." =
+	[
+		2 : "Survivor"
+		3 : "Animatronic"
+	]
+]
+
+@SolidClass base(Targetname) = func_dissolve : "FH: Clip brush where props dissolve."
+[
+	enabled(choices) : "Enabled" : 0 : "Enable the brush entity." =
+	[
+		1 : "Yes"
+		0 : "No"
+	]
+
+	// Inputs
+	input enable(void)   : "Enable the entity."
+	input disable(void)  : "Disable the entity."
+	input seton(integer) : "Set Enabled keyvalue."
+]
+
+@PointClass iconsprite("editor/logic_auto.vmt") = round_director :
+	"Run your logic as Fazbear's Hunt round event's occure. " +
+	"If 'Remove on fire' flag is set the logic_auto is deleted after firing. "
+[
+	// Outputs
+	output OnStartRound(void) : "Fired when the round has started."
+	output OnPostStartRound(void) : "Fired when animatronics got unfrozen."
+	output OnEndGameKillers(void) : "Fired when the round ended by killers."
+	output OnEndGameSurvivors(void) : "Fired when the round ended by survivors."
+	output OnTimerCutback(void) : "Fired when the round's timer has cut due LMS situation."
+]
