@@ -43,14 +43,16 @@
 		"team number matches the given team will pass the filter. If the filter mode is Disallow, "+
 		"all entities EXCEPT those whose team number matches the given team will pass the filter." =
 	[
-		2 : "Survivor"
-		3 : "Animatronic"
+		2 : "Survivor (OBSOLETE)"
+		3 : "Animatronic (OBSOLETE)"
+		2700 : "Survivor"
+		2701 : "Animatronic"
 	]
 ]
 
 @SolidClass base(Targetname) = func_dissolve : "FH: Clip brush where props dissolve."
 [
-	enabled(choices) : "Enabled" : 0 : "Enable the brush entity." =
+	enabled(choices) : "Enabled" : 1 : "Enable the brush entity." =
 	[
 		1 : "Yes"
 		0 : "No"
@@ -71,5 +73,6 @@
 	output OnPostStartRound(void) : "Fired when animatronics got unfrozen."
 	output OnEndGameKillers(void) : "Fired when the round ended by killers."
 	output OnEndGameSurvivors(void) : "Fired when the round ended by survivors."
-	output OnTimerCutback(void) : "Fired when the round's timer has cut due LMS situation."
+	output OnLastManStanding(void) : "Fired when the LMS event has began."
+	output OnTimerCutback(void) : "Fired when the round's timer was cut."
 ]
